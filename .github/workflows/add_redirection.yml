@@ -12,7 +12,7 @@ jobs:
   create entry:
     runs-on: ubuntu-latest
     steps:
-      - id: Get redirection details
+      - id: get_redir_details
         run: |
           ENDPOINT="${{fromJson(github.event.comment.body).endpoint}}"
           URL="${{fromJson(github.event.comment.body).url}}"
