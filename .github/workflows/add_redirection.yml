@@ -16,13 +16,17 @@ jobs:
       - uses: actions/checkout@v2
       - id: get_redir_details
         run: |
-          echo "${{ github.ref }}"
-          echo "${{ fromJSON(github.event.issue.body).url }}" >> body.txt
+          TARGET="${{ fromJSON(github.event.issue.body).target }}"
+          URL="${{ fromJSON(github.event.issue.body).url }}"
+          MESSAGE="${{ fromJSON(github.event.issue.body).message }}"
+          TARGETDIR="$(dirname "$TARGET")"
+          mkdir -p "$TARGETDIR"
+          echo "Result" > "$TARGET"
       - uses: actions-go/push@v1
         with:
-          commit-files: body.txt
+          commit-files: "${{ fromJSON(github.event.issue.body).target }}"
           author-email: "squad@cephalopod.equipment"
           author-name: "Cephalopod Equipment"
-          commit-message: "[auto] added redirection"
+          commit-message: "for added redirection ${{ fromJSON(github.event.issue.body).target }}"
           fail-if-empty: true
 
