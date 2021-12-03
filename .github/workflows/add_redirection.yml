@@ -19,12 +19,14 @@ jobs:
           ENDPOINT="${{ fromJSON(github.event.issue.body).endpoint }}"
           URL="${{ fromJSON(github.event.issue.body).url }}"
           MESSAGE="${{ fromJSON(github.event.issue.body).message }}"
-          TARGET="docs/${ENDPOINT}"
+          TARGET="docs/${ENDPOINT}.html"
           mkdir -p "$(dirname "$TARGET")"
+          sed "s,XXXURLXXX,${URL},g" templates/redir.tmpl > "$TARGET"
+          sed -i "s/<!--XXXMESSAGEXXX-->/${MESSAGE}/" "$TARGET"
           echo "$URL, $MESSAGE" > "$TARGET"
       - uses: actions-go/push@v1
         with:
-          commit-files: "docs/${{ fromJSON(github.event.issue.body).endpoint }}"
+          commit-files: "docs/${{ fromJSON(github.event.issue.body).endpoint }}.html"
           author-email: "squad@cephalopod.equipment"
           author-name: "Cephalopod Equipment"
           commit-message: "for added redirection ${{ fromJSON(github.event.issue.body).target }}"
