@@ -1,0 +1,29 @@
+name: "Ceph.is website redirection creation"
+
+on:
+  issues:
+    types:
+      - opened
+
+permissions:
+  issues: write
+
+jobs:
+  create entry:
+    runs-on: ubuntu-latest
+    steps:
+      - id: Get redirection details
+        run: |
+        ENDPOINT="${{fromJson(github.event.comment.body).endpoint}}"
+        URL="${{fromJson(github.event.comment.body).url}}"
+        MESSAGE="${{fromJson(github.event.comment.body).message}}"
+	echo "$ENDPOINT" >> docs/endpoint.txt
+	echo "$URL" >> docs/url.txt
+	echo "$MESSAGE" >> docs/message.txt
+      - uses: actions-go/push@v1
+        with:
+          author-email: "squad@cephalopod.equipment"
+          author-name: "Cephalopod Equipment"
+          commit-message: "[auto] added redirection"
+          fail-if-empty: true
+
