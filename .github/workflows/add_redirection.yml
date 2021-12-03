@@ -23,7 +23,6 @@ jobs:
           mkdir -p "$(dirname "$TARGET")"
           sed "s,XXXURLXXX,${URL},g" templates/redir.tmpl > "$TARGET"
           sed -i "s/<!--XXXMESSAGEXXX-->/${MESSAGE}/" "$TARGET"
-          echo "$URL, $MESSAGE" > "$TARGET"
       - uses: actions-go/push@v1
         with:
           commit-files: "docs/${{ fromJSON(github.event.issue.body).endpoint }}.html"
