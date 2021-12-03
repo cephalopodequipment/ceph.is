@@ -14,7 +14,7 @@ jobs:
     steps:
       - id: get_redir_details
         run: |
-          echo "github.event.issue.body" >> docs/body.txt
+          echo "github.event.issue.body" >> body.txt
       - uses: actions-go/push@v1
         with:
           author-email: "squad@cephalopod.equipment"
