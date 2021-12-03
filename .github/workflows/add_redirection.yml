@@ -16,7 +16,6 @@ jobs:
       - uses: actions/checkout@v2
       - id: get_redir_details
         run: |
-          TARGETDIR="$(dirname "${{ fromJSON(github.event.issue.body).target }}")"
           mkdir -p "$(dirname "${{ fromJSON(github.event.issue.body).target }}")"
           echo "Result" > "${{ fromJSON(github.event.issue.body).target }}"
       - uses: actions-go/push@v1
