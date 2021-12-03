@@ -16,14 +16,15 @@ jobs:
       - uses: actions/checkout@v2
       - id: get_redir_details
         run: |
-          TARGET="${{ fromJSON(github.event.issue.body).endpoint }}"
+          ENDPOINT="${{ fromJSON(github.event.issue.body).endpoint }}"
           URL="${{ fromJSON(github.event.issue.body).url }}"
           MESSAGE="${{ fromJSON(github.event.issue.body).message }}"
+          TARGET="docs/${ENDPOINT}"
           mkdir -p "$(dirname "$TARGET")"
           echo "$URL, $MESSAGE" > "$TARGET"
       - uses: actions-go/push@v1
         with:
-          commit-files: "${{ fromJSON(github.event.issue.body).target }}"
+          commit-files: "docs/${{ fromJSON(github.event.issue.body).endpoint }}"
           author-email: "squad@cephalopod.equipment"
           author-name: "Cephalopod Equipment"
           commit-message: "for added redirection ${{ fromJSON(github.event.issue.body).target }}"
