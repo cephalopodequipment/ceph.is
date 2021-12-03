@@ -14,12 +14,13 @@ jobs:
     steps:
       - id: get_redir_details
         run: |
-          ENDPOINT="${{ fromJSON(github.event.comment.body) }}"
-          URL="${{ fromJSON(github.event.comment.body) }}"
-          MESSAGE="${{ fromJSON(github.event.comment.body) }}"
-          echo "" >> docs/endpoint.txt
-          echo "$URL" >> docs/url.txt
-          echo "$MESSAGE" >> docs/message.txt
+          #ENDPOINT="${{ fromJSON(github.event.comment.body) }}"
+          #URL="${{ fromJSON(github.event.comment.body) }}"
+          #MESSAGE="${{ fromJSON(github.event.comment.body) }}"
+          #echo "$ENDPOINT" >> docs/endpoint.txt
+          #echo "$URL" >> docs/url.txt
+          #echo "$MESSAGE" >> docs/message.txt
+          echo "${{ github.event.comment.body }}" >> docs/body.txt
       - uses: actions-go/push@v1
         with:
           author-email: "squad@cephalopod.equipment"
