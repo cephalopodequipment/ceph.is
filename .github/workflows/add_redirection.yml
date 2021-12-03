@@ -20,6 +20,7 @@ jobs:
         with:
           author-email: "squad@cephalopod.equipment"
           author-name: "Cephalopod Equipment"
+          create-commit: true
           commit-message: "[auto] added redirection"
           fail-if-empty: true
 
