@@ -30,4 +30,9 @@ jobs:
           author-name: "Cephalopod Equipment"
           commit-message: "for added redirection ${{ fromJSON(github.event.issue.body).target }}"
           fail-if-empty: true
+      - uses: peter-evans/close-issue@v1
+        with:
+          comment: |
+            Website updated.
+            Closing issue.
 
