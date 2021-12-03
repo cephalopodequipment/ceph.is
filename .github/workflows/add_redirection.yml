@@ -15,12 +15,13 @@ jobs:
       - uses: actions/checkout@v2
       - id: get_redir_details
         run: |
+          echo "${{ github.ref }}"
           echo "${{ fromJSON(github.event.issue.body).url }}" >> body.txt
       - uses: actions-go/push@v1
         with:
+          commit-files: body.txt
           author-email: "squad@cephalopod.equipment"
           author-name: "Cephalopod Equipment"
-          create-commit: true
           commit-message: "[auto] added redirection"
           fail-if-empty: true
 
