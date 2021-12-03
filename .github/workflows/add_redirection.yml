@@ -12,9 +12,10 @@ jobs:
   create_entry:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - id: get_redir_details
         run: |
-          echo "github.event.issue.body" >> body.txt
+          echo "github.event.issue.body" >> docs/body.txt
       - uses: actions-go/push@v1
         with:
           author-email: "squad@cephalopod.equipment"
