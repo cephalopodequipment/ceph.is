@@ -9,7 +9,7 @@ permissions:
   issues: write
 
 jobs:
-  create entry:
+  create_entry:
     runs-on: ubuntu-latest
     steps:
       - id: get_redir_details
